@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1072640341221",
+    "firebase_url": "https://retomoviles.firebaseio.com",
+    "project_id": "retomoviles",
+    "storage_bucket": "retomoviles.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1072640341221:android:0fe3117b59722cbf",
+        "android_client_info": {
+          "package_name": "com.appmoviles.retomoviles"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1072640341221-csts4ejnh49r131k5rks325jqd7241ic.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appmoviles.retomoviles",
+            "certificate_hash": "13943a7da1f7214a6a2ce2693a010b222a086976"
+          }
+        },
+        {
+          "client_id": "1072640341221-e2s9rc77b74opcc9io69lg8ehvopermo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdyjbQdHTLgu7qN0KHgT0yxWoUSXklFeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1072640341221-e2s9rc77b74opcc9io69lg8ehvopermo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
