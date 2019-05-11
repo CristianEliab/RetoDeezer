@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class ServiceManager {
 
-    public static final String PLAY_LIST = "https://api.deezer.com/user/2529/playlists";
+    public static final String PLAY_LIST = "https://api.deezer.com/search/playlist?q=eminem";
     public static final String SEARCH = "https://api.deezer.com/search/playlist?q=";
 
     public static class PLAYLISTGET {

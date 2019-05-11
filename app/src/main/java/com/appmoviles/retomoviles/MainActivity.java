@@ -53,15 +53,14 @@ public class MainActivity extends AppCompatActivity implements AdapterPlayList.O
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject playListJson = jsonArray.getJSONObject(i);
                                 String nombre_lista = playListJson.getString("title");
-                                JSONObject creadorJson = playListJson.getJSONObject("creator");
+                                JSONObject creadorJson = playListJson.getJSONObject("user");
                                 String nombre_creador = creadorJson.getString("name");
                                 String numero_canciones = playListJson.getString("nb_tracks");
                                 String icono = playListJson.getString("picture_big");
                                 String descripcion = playListJson.getString("creation_date");
-                                String n_fans = playListJson.getString("fans");
                                 String track_list = playListJson.getString("tracklist");
 
-                                PlayList playList = new PlayList(nombre_lista, nombre_creador, numero_canciones, descripcion, n_fans);
+                                PlayList playList = new PlayList(nombre_lista, nombre_creador, numero_canciones, descripcion, "");
                                 playList.setIcon_play_list(icono);
                                 playList.setTrackList(track_list);
                                 adapterPlayList.agregarPlayList(playList);
@@ -102,10 +101,9 @@ public class MainActivity extends AppCompatActivity implements AdapterPlayList.O
                                     String numero_canciones = playListJson.getString("nb_tracks");
                                     String icono = playListJson.getString("picture_big");
                                     String descripcion = playListJson.getString("creation_date");
-                                    String n_fans = playListJson.getString("type");
                                     String track_list = playListJson.getString("tracklist");
 
-                                    PlayList playList = new PlayList(nombre_lista, nombre_creador, numero_canciones, descripcion, n_fans);
+                                    PlayList playList = new PlayList(nombre_lista, nombre_creador, numero_canciones, descripcion, "");
                                     playList.setIcon_play_list(icono);
                                     playList.setTrackList(track_list);
                                     runOnUiThread(() -> adapterPlayList.agregarPlayList(playList));
