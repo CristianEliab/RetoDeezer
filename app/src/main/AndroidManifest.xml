@@ -15,13 +15,14 @@
         android:theme="@style/AppTheme">
         <activity android:name=".DetalleActivity"></activity>
         <activity android:name=".PlayListActivity" />
-        <activity android:name=".LauncherActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LauncherActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
         </activity>
     </application>
 

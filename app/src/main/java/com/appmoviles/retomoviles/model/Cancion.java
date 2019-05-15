@@ -11,6 +11,8 @@ public class Cancion implements Serializable {
     private String numeroFans;
     private String icon;
     private String cancion;
+    private String id_cancion;
+    private String albun_cancion;
 
     public Cancion() {
     }
@@ -77,5 +79,21 @@ public class Cancion implements Serializable {
 
     public void setCancion(String cancion) {
         this.cancion = cancion;
+    }
+
+    public String getId_cancion() {
+        return id_cancion;
+    }
+
+    public void setId_cancion(String id_cancion) {
+        this.id_cancion = id_cancion;
+    }
+
+    public String getAlbun_cancion() {
+        return albun_cancion;
+    }
+
+    public void setAlbun_cancion(String albun_cancion) {
+        this.albun_cancion = albun_cancion;
     }
 }

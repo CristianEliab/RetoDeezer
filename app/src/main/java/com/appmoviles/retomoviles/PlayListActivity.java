@@ -50,8 +50,30 @@ public class PlayListActivity extends AppCompatActivity implements AdapterCancio
         lista_canciones = findViewById(R.id.lista_canciones);
 
         tv_detalle_nombre_play_list.setText(playList.getNombrePlayList());
-        tv_detalle_descripcion.setText(playList.getDescripcion());
-        tv_detalle.setText(playList.getNombreCreador());
+
+        new Thread(() -> {
+            new ServiceManager.DESCRIPCIPNGET(response -> {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    String descripcion_json = jsonObject.getString("description");
+                    String fans = jsonObject.getString("fans");
+                    if (descripcion_json.trim().equals("")) {
+                        runOnUiThread(() -> {
+                                    tv_detalle_descripcion.setText("Esta PlayList, no tiene descripción.");
+                                    tv_detalle.setText("( " + playList.getNumeroCansiones() + " canciones" + ") " + " ( " + fans + " fans )");
+                        });
+                    } else
+                        runOnUiThread(() -> {
+                            tv_detalle_descripcion.setText(descripcion_json);
+                            tv_detalle.setText("( " + playList.getNumeroCansiones() + " canciones" + ") " + " ( " + fans + " fans )");
+                        });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }, playList.getId_playList());
+        }).start();
+
 
         Glide.with(this).load(playList.getIcon_play_list()).into(iv_imagen_play);
 
@@ -74,13 +96,36 @@ public class PlayListActivity extends AppCompatActivity implements AdapterCancio
                         String icono_cancion = artistJson.getString("picture");
                         String descripcion = cancionJSON.getString("duration");
                         String n_fans = cancionJSON.getString("explicit_lyrics");
-                        String cancion_link = cancionJSON.getString("preview");
+                        String cancion_link = cancionJSON.getString("link");
+                        String id_cancion = cancionJSON.getString("id");
+                        JSONObject albumJson = cancionJSON.getJSONObject("album");
+                        String nombre_album = albumJson.getString("title");
 
                         Cancion cancion = new Cancion(nombre_cancion, nombre_artista, anio, descripcion, n_fans);
                         cancion.setIcon(icono_cancion);
                         cancion.setCancion(cancion_link);
+                        cancion.setId_cancion(id_cancion);
+                        cancion.setAlbun_cancion(nombre_album);
 
-                        runOnUiThread(() -> adapterCanciones.agregarCancion(cancion));
+                        new Thread(() -> {
+                            new ServiceManager.ANIOCANCIONGET(resultado -> {
+                                try {
+                                    JSONObject jsonObjectConsulta = new JSONObject(resultado);
+                                    String release_date = jsonObjectConsulta.getString("release_date");
+                                    if (release_date.trim().equals("")) {
+                                        cancion.setAnioLanzamiento("No tiene año de lanzamiento");
+                                    } else {
+                                        cancion.setAnioLanzamiento(release_date);
+                                    }
+
+                                    runOnUiThread(() -> adapterCanciones.agregarCancion(cancion));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }, id_cancion);
+                        }).start();
+
+
 
                     }
                 } catch (JSONException e) {
@@ -95,18 +140,13 @@ public class PlayListActivity extends AppCompatActivity implements AdapterCancio
         lista_canciones.setAdapter(adapterCanciones);
 
 
-        iv_icon_return.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        iv_icon_return.setOnClickListener(v -> onBackPressed());
 
     }
 
     @Override
     public void onItemClick(Cancion cancion) {
-        if (cancion != null){
+        if (cancion != null) {
             Intent i = new Intent(PlayListActivity.this, DetalleActivity.class);
             i.putExtra("CANCION", cancion);
             startActivity(i);

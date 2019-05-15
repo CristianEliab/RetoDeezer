@@ -46,8 +46,8 @@ public class DetalleActivity extends AppCompatActivity {
         Glide.with(this).load(cancion.getIcon()).into(iv_imagen_play);
         tv_detalle_nombre_cancion.setText(cancion.getNombreCancion());
         tv_detalle_nombre_artista.setText(cancion.getNombreArtista());
-        tv_detalle_descripcion_albun_cancion.setText(cancion.getAnioLanzamiento());
-        tv_detalle.setText(cancion.getDescripcion());
+        tv_detalle_descripcion_albun_cancion.setText(cancion.getAlbun_cancion());
+        tv_detalle.setText(cancion.getDescripcion() + " segundos");
 
         iv_icon_return.setOnClickListener(v -> onBackPressed());
 
@@ -55,11 +55,13 @@ public class DetalleActivity extends AppCompatActivity {
         btn_escuchar_cancion.setOnClickListener(v -> {
             try {
                 Uri uri = Uri.parse(cancion.getCancion());
-                MediaPlayer player = new MediaPlayer();
+                Intent i = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(i);
+                /*MediaPlayer player = new MediaPlayer();
                 player.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 player.setDataSource(DetalleActivity.this, uri);
                 player.prepare();
-                player.start();
+                player.start();*/
             } catch (Exception e) {
                 System.out.println(e.toString());
             }

@@ -10,8 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appmoviles.retomoviles.R;
+import com.appmoviles.retomoviles.Service.ServiceManager;
 import com.appmoviles.retomoviles.model.Cancion;
 import com.bumptech.glide.Glide;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -55,12 +59,9 @@ public class AdapterCanciones extends RecyclerView.Adapter<AdapterCanciones.Cust
         ImageView img = holder.root.findViewById(R.id.iv_icon_cansion);
         Glide.with(holder.root.getContext()).load(data.get(position).getIcon()).into(img);
 
-        holder.root.findViewById(R.id.ll_item_cancion).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                index = position;
-                listener.onItemClick(data.get(position));
-            }
+        holder.root.findViewById(R.id.ll_item_cancion).setOnClickListener(v -> {
+            index = position;
+            listener.onItemClick(data.get(position));
         });
 
     }

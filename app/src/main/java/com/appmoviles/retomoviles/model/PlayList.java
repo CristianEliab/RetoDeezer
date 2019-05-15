@@ -11,6 +11,7 @@ public class PlayList implements Serializable {
     private String numeroFans;
     private String icon_play_list;
     private String trackList;
+    private String id_playList;
 
     public PlayList(String nombrePlayList, String nombreCreador, String numeroCansiones, String descripcion, String numeroFans) {
         this.nombrePlayList = nombrePlayList;
@@ -77,5 +78,13 @@ public class PlayList implements Serializable {
 
     public void setTrackList(String trackList) {
         this.trackList = trackList;
+    }
+
+    public String getId_playList() {
+        return id_playList;
+    }
+
+    public void setId_playList(String id_playList) {
+        this.id_playList = id_playList;
     }
 }
